@@ -34,8 +34,9 @@ TOKEN = tokens.token()
 client = discord.Client()
 
 
+
 async def SendMessage(ticket_info):
-    await client.get_channel(642961505800945673).send(s_message(ticket_info))
+    await client.get_channel(tokens.ch()).send(s_message(ticket_info))
 
 
 @client.event
