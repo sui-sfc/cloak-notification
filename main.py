@@ -11,7 +11,7 @@ url = 'https://cloak.pia.jp/resale/item/list?eventCd=2209305&eventCd=2209306&eve
 
 
 
-performance_name,performance_date,ticket,sheets,price = get_info.get_cloak_ticket_info(url)
+performance_name,performance_date,ticket,sheets,price = get_info.get_cloak_ticket_info(url,1)
 
 print(performance_name)
 print(performance_date)
