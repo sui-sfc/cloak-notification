@@ -41,10 +41,25 @@ async def SendMessage(ticket_info):
 #ログイン
 @client.event
 async def on_ready():
-    print('ログイン') 
-    ticket_info = get_info.get_cloak_ticket_info(url, 1)
-    await SendMessage(ticket_info)
-    f_write(ticket_info)
+    
+    #ファイルの存在確認
+    #jsonが存在した時
+    try:
+        print('ログイン')
+        latast_data = f_read()
+        ticket_info = get_info.get_cloak_ticket_info(url, 1)
+        if latast_data == ticket_info:
+            pass
+        else:
+            f_write(ticket_info)
+            await SendMessage(ticket_info)
+
+    #存在しなかった時
+    except FileNotFoundError:
+        print('初回起動')
+        ticket_info = get_info.get_cloak_ticket_info(url, 1)
+        await SendMessage(ticket_info)
+        f_write(ticket_info)
     print('run')
     timeloop.start()
 
@@ -52,14 +67,14 @@ async def on_ready():
 #無限ループ
 @tasks.loop(seconds=30)
 async def timeloop():
-    print('test')
+    print('start loop')
     latast_data = f_read()
     ticket_info = get_info.get_cloak_ticket_info(url, 1)
     if latast_data == ticket_info:
         pass
     else:
-       await SendMessage(ticket_info)
-
+        f_write(ticket_info)
+        await SendMessage(ticket_info)
 
 
 client.run(TOKEN)
