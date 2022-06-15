@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import time
 
-#cloakの番目のチケットを取得
+#cloakのn番目のチケットを取得
 def get_cloak_ticket_info(url,n):
     n = str(n)
     while(1):
@@ -33,8 +33,22 @@ def get_cloak_ticket_info(url,n):
                 '#wrapper > div > div.item_result_wrapper > ol:nth-child(' + n +
                 ') > div > a > div.item_total > span:nth-child(2)'
             )[0].contents[0]
+            '''
+            buy_url = soup.select(
+                '#wrapper > div > div.item_result_wrapper > ol:nth-child(' + n +
+                ') > div > a'
+            )
+            '''
+            buy_url = soup.find_all('a')
+            tmp = []
+            for i in buy_url:
+                if 'item/detail' in i.get('href'):
+                    tmp.append(i.get('href'))
+            buy_url = 'https://cloak.pia.jp' + tmp[int(n)-1]
             break
         except IndexError:
-            continue
+            print('continue')
             #time.sleep(5)
-    return performance_name, performance_date, sheets, ticket, price
+            continue
+            
+    return performance_name, performance_date, sheets, ticket, price,buy_url
