@@ -50,5 +50,7 @@ def get_cloak_ticket_info(url,n):
             print('continue')
             #time.sleep(5)
             continue
-            
-    return performance_name, performance_date, sheets, ticket, price,buy_url
+    ticket_info = {'name': str(performance_name), 'date': str(performance_date), 'ticket': str(
+        ticket), 'sheets': str(sheets), 'price': str(price), 'url': str(buy_url)}
+
+    return ticket_info
