@@ -34,11 +34,11 @@ TOKEN = tokens.token()
 client = discord.Client()
 
 
-
+#チケット情報送信
 async def SendMessage(ticket_info):
     await client.get_channel(tokens.ch()).send(s_message(ticket_info))
 
-
+#ログイン
 @client.event
 async def on_ready():
     print('ログイン') 
@@ -49,7 +49,7 @@ async def on_ready():
     timeloop.start()
 
   
-
+#無限ループ
 @tasks.loop(seconds=30)
 async def timeloop():
     print('test')
