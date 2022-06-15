@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import time
 
+#cloakの番目のチケットを取得
 def get_cloak_ticket_info(url,n):
     n = str(n)
     while(1):

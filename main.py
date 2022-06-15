@@ -2,8 +2,6 @@ from cgitb import html
 from unicodedata import name
 from bs4 import BeautifulSoup
 import get_info
-import re
-
 from tomlkit import date
 
 url = 'https://cloak.pia.jp/resale/item/list?eventCd=2209305&eventCd=2209306&eventCd=2209307&acptCliCd=ATM043&acptCliCd=ATM053&acptCliCd=ATM003&acptCliCd=ATM013&acptCliCd=ATM023&acptCliCd=ATM033&acptCliCd=ATM063&acptCliCd=ATM073'
