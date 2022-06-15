@@ -1,6 +1,7 @@
 from cgitb import html
+from unicodedata import name
 from bs4 import BeautifulSoup
-from matplotlib.pyplot import title
+from matplotlib.pyplot import ticklabel_format, title
 import requests
 import re
 
@@ -14,8 +15,28 @@ soup = BeautifulSoup(res.text, "html.parser")
 #elems = soup.select('#wrapper > div > div.item_result_wrapper > ol:nth-child(1) > div')
 #elems = soup.find_all("a")
 
-title = soup.find('h1', class_='item_title')
-date = soup.select(
-    '#wrapper > div > div.item_result_wrapper > ol:nth-child(1) > div > a > div.item_header.clearfix > div > p:nth-child(1)')
-title = title.contents[0]
-date = date[0].contents[0]
+performance_name = soup.select(
+    '#wrapper > div > div.item_result_wrapper > ol:nth-child(1) > div > a > h1'
+)[0].contents[0]
+
+performance_date = soup.select(
+    '#wrapper > div > div.item_result_wrapper > ol:nth-child(1) > div > a > div.item_header.clearfix > div > p:nth-child(1)'
+)[0].contents[0]
+
+sheets = soup.select(
+    '#wrapper > div > div.item_result_wrapper > ol:nth-child(1) > div > a > div.item_result_box_msg > span > span:nth-child(1)'
+)[0].contents[0]
+
+ticket = soup.select(
+    '#wrapper > div > div.item_result_wrapper > ol:nth-child(1) > div > a > div.item_result_box_msg > p'
+)[0].contents[0]
+
+price = soup.select(
+    '#wrapper > div > div.item_result_wrapper > ol:nth-child(1) > div > a > div.item_total > span:nth-child(2)'
+)[0].contents[0]
+
+print(performance_name)
+print(performance_date)
+print(ticket)
+print(sheets)
+print(price)
