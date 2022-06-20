@@ -1,3 +1,4 @@
+from genericpath import exists
 from bs4 import BeautifulSoup
 import requests
 import time
@@ -9,6 +10,12 @@ def get_cloak_ticket_info(url,n):
         try:  
             res = requests.get(url)
             soup = BeautifulSoup(res.text, "html.parser")
+            
+            #if system maintenance error
+            if 'error_block' in soup.select('#wrapper > div > div > div')[0].get('class'):
+                print('system maintenance')
+                time.sleep(3600)
+            
             performance_name = soup.select(
                 '#wrapper > div > div.item_result_wrapper > ol:nth-child(' + n+ 
                 ') > div > a > h1'
@@ -28,7 +35,7 @@ def get_cloak_ticket_info(url,n):
                 '#wrapper > div > div.item_result_wrapper > ol:nth-child('+ n +
                 ') > div > a > div.item_result_box_msg > p'
             )[0].contents[0]
-
+            
             price = soup.select(
                 '#wrapper > div > div.item_result_wrapper > ol:nth-child(' + n +
                 ') > div > a > div.item_total > span:nth-child(2)'
@@ -39,6 +46,7 @@ def get_cloak_ticket_info(url,n):
                 ') > div > a'
             )
             '''
+            #チケットURL
             buy_url = soup.find_all('a')
             tmp = []
             for i in buy_url:
@@ -48,7 +56,7 @@ def get_cloak_ticket_info(url,n):
             break
         except IndexError:
             print('continue')
-            #time.sleep(5)
+            time.sleep(5)
             continue
     ticket_info = {'name': str(performance_name.replace('\u3000', '')), 'date': str(performance_date), 'ticket': str(
         ticket), 'sheets': str(sheets), 'price': str(price), 'url': str(buy_url)}
