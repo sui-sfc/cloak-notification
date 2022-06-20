@@ -1,23 +1,23 @@
-cloakリセールチケット更新監視bot
+monitor cloak resale tickets bot on Discord
 
-次のようなpythonファイル token.pyを作ってください
+make python file 'token.py' in root 
 ```
 def token():
     TOKEN = discord token
     return TOKEN
 
 def url():
-    url = 調べたいcloak url
+    url = cloak url
     return url
 
 def ch():
-    ch = 送りたいチャンネルID
+    ch = discord channel ID
     return ch
 
 ```
-対応予定の機能
+To Be Updated
 
-- チャンネルのリスト化
-- cloak urlのリスト化
-- 公演終了時に自動的に削除
-- google スプレッドシートとの連携
+- Support for multi channels
+- Support for multi cloak urls
+- Automatically deleted at the end of the performance
+- sync with google spreadsheets
