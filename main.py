@@ -60,6 +60,7 @@ async def on_ready():
         ticket_info = get_info.get_cloak_ticket_info(url, 1)
         await SendMessage(ticket_info)
         f_write(ticket_info)
+    #共にする処理
     print('run')
     timeloop.start()
 
