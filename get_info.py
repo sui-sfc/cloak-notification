@@ -1,4 +1,3 @@
-from genericpath import exists
 from bs4 import BeautifulSoup
 import requests
 import time
@@ -12,10 +11,11 @@ def get_cloak_ticket_info(url,n):
             soup = BeautifulSoup(res.text, "html.parser")
             
             #if system maintenance error
+            '''
             if 'error_block' in soup.select('#wrapper > div > div > div')[0].get('class'):
                 print('system maintenance')
                 time.sleep(3600)
-            
+            '''
             performance_name = soup.select(
                 '#wrapper > div > div.item_result_wrapper > ol:nth-child(' + n+ 
                 ') > div > a > h1'

@@ -36,7 +36,10 @@ client = discord.Client()
 
 #チケット情報送信
 async def SendMessage(ticket_info):
-    await client.get_channel(tokens.ch()).send(s_message(ticket_info))
+    try:
+        await client.get_channel(tokens.ch()).send(s_message(ticket_info))
+    except:
+        pass
 
 #ログイン
 @client.event
