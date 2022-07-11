@@ -71,7 +71,7 @@ async def on_ready():
 #無限ループ
 @tasks.loop(seconds=30)
 async def timeloop():
-    print('start loop')
+    print('loop')
     latast_data = f_read()
     ticket_info = get_info.get_cloak_ticket_info(url, 1)
     if latast_data == ticket_info:
