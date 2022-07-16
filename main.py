@@ -38,6 +38,7 @@ client = discord.Client()
 async def SendMessage(ticket_info):
     try:
         await client.get_channel(tokens.ch()).send(s_message(ticket_info))
+        print('posted')
     except:
         pass
 
